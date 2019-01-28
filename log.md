@@ -5,3 +5,11 @@
 **Today's Progress**: Started to learn Rust and created folder 'TestProject'
 
 **Thoughts:** Rust is really cool, but is weird in somethings like variables
+
+## Day 1: January 27, 2018
+
+**Today's Progress**: Maked a Kata challenge named 'Desending Order'
+
+**Thoughts:** Have i need to learn more about Rust
+
+[Link to challenge](https://www.codewars.com/kata/descending-order/rust)
