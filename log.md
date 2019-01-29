@@ -13,3 +13,11 @@
 **Thoughts:** Have i need to learn more about Rust
 
 [Link to challenge](https://www.codewars.com/kata/descending-order/rust)
+
+## Day 2: January 28, 2018
+
+**Today's Progress**: Maked a Kata challenge named 'Duplicate encoder'
+
+**Thoughts:** Working on optimization algorithm for the code
+
+[Link to challenge](https://www.codewars.com/kata/duplicate-encoder/train/rust)
