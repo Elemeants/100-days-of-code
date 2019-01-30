@@ -21,3 +21,11 @@
 **Thoughts:** Working on optimization algorithm for the code
 
 [Link to challenge](https://www.codewars.com/kata/duplicate-encoder/train/rust)
+
+## Day 3: January 29, 2018
+
+**Today's Progress**: Maked a Kata challenge named 'Reverse or rotate?'
+
+**Thoughts:** Nothing to say
+
+[Link to challenge](https://www.codewars.com/kata/reverse-or-rotate/train/rust)
