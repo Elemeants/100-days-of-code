@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "lib/array.h"
 using namespace std;
 
@@ -20,14 +21,12 @@ void ImprimirDatosProducto(struct Products producto) {
 
 int main() {
     List<Products> asfa = List<Products>();
-    for (int i = 1; i <= 70000; i++) {
+	auto start = std::chrono::steady_clock::now();
+    for (int i = 1; i <= 100000; i++) {
         asfa.push_last(CreateNewProduct(i, "Producto"));
-    }
-    asfa.forEach(
-            [](int index, Products &x) -> 
-            void {
-                ImprimirDatosProducto(x);
-            } 
-        );
+    } 
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
+		(std::chrono::steady_clock::now() - start);
+	cout << "Size: " << sizeof(asfa) << " Bytes ~ Execution Time: " << duration.count() << " ms" << endl;
     return 0;
 }
