@@ -29,3 +29,8 @@
 **Thoughts:** Nothing to say
 
 [Link to challenge](https://www.codewars.com/kata/reverse-or-rotate/train/rust)
+
+## Day 4: January 30, 2018
+
+Today i stated to work on a C++ 11 library, for Lists, this new project is inside the 'Cpp\DinamicArray' folder
+is not finished, but the basic structure is working, also i'm implementing lambadas to allow bette functions
