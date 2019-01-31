@@ -1,32 +1,56 @@
 #include <iostream>
-#include <chrono>
-#include "lib/array.h"
+#include "lib/list.h"
 using namespace std;
 
-struct Products {
-    int Id;
-    char* Nombre;
-};
-
-struct Products CreateNewProduct(int id, const char* nombre) {
-    Products product;
-    product.Id = id;
-    product.Nombre = (char*)nombre;
-    return product;
+template <typename T>
+size_t GetBytesSize(List<T> list) {
+    return list.length() * sizeof(list);
 }
 
-void ImprimirDatosProducto(struct Products producto) {
-    printf("  Producto %i: %s\n", producto.Id, producto.Nombre);
+void ExampleList() {
+    // Lista sin datos predefinidos, de longitud 0.
+    List<int> IntegerList = List<int>();
+    // Lista con 50 datos predefinidos como el default del tipo que se le pase <type>
+    List<char*> List2 = List<char*>(50);
+    // Agregamos data
+    IntegerList.push(10);
+    IntegerList.push(20);
+    IntegerList.push(30);
+    IntegerList.push(40);
+    // Quitamos la informacion
+    IntegerList.pop();
+    // Accedemos al dato que pusimos
+    IntegerList[0] = 1;
+    // Limpiamos los datos de la lista2
+    List2.clear();
+    // Ejecutamos una funcion lambda para todos los elementos de una lista
+    // Examples: 
+    IntegerList.forEach(
+        [](int index, int &valor) -> void {
+            // Codigo de la funcion
+            printf("%i-. %i\n", index, valor);
+        }
+    );
+
+    // Funcion mapping que retorna una lista del valor definido ejecutando un filtro
+    // de los elementos de la lista original
+    //    - map < tipo de valor a retornar -> ( funcion lambda [](tipo &valor) -> tipo { codigo })
+    List2 = IntegerList.map<char*>(
+        [](int index, int &valor) -> char* {
+            char* out = new char[3];
+            itoa(valor, out, 10);
+            return out;
+        }
+    );
+
+    // Imprimimos los datos con un for en ves del forEach de la lista
+    printf("\n");
+    for (int i = 0; i < List2.length(); i++ ) {
+        printf("%i -> %s\n", i, List2[i]);
+    }
 }
 
 int main() {
-    List<Products> asfa = List<Products>();
-	auto start = std::chrono::steady_clock::now();
-    for (int i = 1; i <= 100000; i++) {
-        asfa.push_last(CreateNewProduct(i, "Producto"));
-    } 
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>
-		(std::chrono::steady_clock::now() - start);
-	cout << "Size: " << sizeof(asfa) << " Bytes ~ Execution Time: " << duration.count() << " ms" << endl;
+    ExampleList();
     return 0;
 }
