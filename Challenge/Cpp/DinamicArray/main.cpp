@@ -1,5 +1,7 @@
+
+#define TEST_UNIT true
 #include <iostream>
-#include "lib/list.h"
+#include "lib/list.hpp"
 using namespace std;
 
 template <typename T>

@@ -1,12 +1,12 @@
 # 100 Days Of Code - Log
 
-## Day 0: January 26, 2018
+## Day 1: January 26, 2018
 
 **Today's Progress**: Started to learn Rust and created folder 'TestProject'
 
 **Thoughts:** Rust is really cool, but is weird in somethings like variables
 
-## Day 1: January 27, 2018
+## Day 2: January 27, 2018
 
 **Today's Progress**: Maked a Kata challenge named 'Desending Order'
 
@@ -14,7 +14,7 @@
 
 [Link to challenge](https://www.codewars.com/kata/descending-order/rust)
 
-## Day 2: January 28, 2018
+## Day 3: January 28, 2018
 
 **Today's Progress**: Maked a Kata challenge named 'Duplicate encoder'
 
@@ -22,7 +22,7 @@
 
 [Link to challenge](https://www.codewars.com/kata/duplicate-encoder/train/rust)
 
-## Day 3: January 29, 2018
+## Day 4: January 29, 2018
 
 **Today's Progress**: Maked a Kata challenge named 'Reverse or rotate?'
 
@@ -30,7 +30,12 @@
 
 [Link to challenge](https://www.codewars.com/kata/reverse-or-rotate/train/rust)
 
-## Day 4: January 30, 2018
+## Day 5: January 30, 2018
 
 Today i stated to work on a C++ 11 library, for Lists, this new project is inside the 'Cpp\DinamicArray' folder
-is not finished, but the basic structure is working, also i'm implementing lambadas to allow bette functions
+is not finished, but the basic structure is working, also i'm implementing lambadas to allow better functions
+
+## Day 6: January 31, 2018
+
+Today i worked on the Library 'List.hpp' for C++, is stable and working the V1.0, also i created a file called
+'list-test.cpp' is a program to check if the methods are working and stables.
