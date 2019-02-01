@@ -9,50 +9,71 @@ size_t GetBytesSize(List<T> list) {
     return list.length() * sizeof(list);
 }
 
-void ExampleList() {
-    // Lista sin datos predefinidos, de longitud 0.
-    List<int> IntegerList = List<int>();
-    // Lista con 50 datos predefinidos como el default del tipo que se le pase <type>
-    List<char*> List2 = List<char*>(50);
-    // Agregamos data
-    IntegerList.push(10);
-    IntegerList.push(20);
-    IntegerList.push(30);
-    IntegerList.push(40);
-    // Quitamos la informacion
-    IntegerList.pop();
-    // Accedemos al dato que pusimos
-    IntegerList[0] = 1;
-    // Limpiamos los datos de la lista2
-    List2.clear();
-    // Ejecutamos una funcion lambda para todos los elementos de una lista
-    // Examples: 
-    IntegerList.forEach(
-        [](int index, int &valor) -> void {
-            // Codigo de la funcion
-            printf("%i-. %i\n", index, valor);
-        }
-    );
+namespace Models {
+    struct Producto {
+        int id;
+        char* nombre;
+        double costo;
 
-    // Funcion mapping que retorna una lista del valor definido ejecutando un filtro
-    // de los elementos de la lista original
-    //    - map < tipo de valor a retornar -> ( funcion lambda [](tipo &valor) -> tipo { codigo })
-    List2 = IntegerList.map<char*>(
-        [](int index, int &valor) -> char* {
-            char* out = new char[3];
-            itoa(valor, out, 10);
-            return out;
-        }
-    );
+        Producto() : id(0), nombre((char*)""), costo(0.0) { }
+        Producto(int _id, const char* _nombre, double _costo) 
+        : id(_id), nombre((char*)_nombre), costo(_costo) { }
+    };
+}
 
-    // Imprimimos los datos con un for en ves del forEach de la lista
-    printf("\n");
-    for (int i = 0; i < List2.length(); i++ ) {
-        printf("%i -> %s\n", i, List2[i]);
-    }
+namespace Data {
+    struct Table_Productos {
+        List<Models::Producto> productosData;
+        Table_Productos() {
+            this->productosData = List<Models::Producto>(0);
+            this->productosData.push_back(Models::Producto(0, "Langley", 144.883));
+            this->productosData.push_back(Models::Producto(1, "Hinton", 84.0902));
+            this->productosData.push_back(Models::Producto(2, "Patel", 15.8934));
+            this->productosData.push_back(Models::Producto(3, "Henson", 161.877));
+            this->productosData.push_back(Models::Producto(4, "Cash", 132.913));
+            this->productosData.push_back(Models::Producto(5, "Decker", 1.382));
+            this->productosData.push_back(Models::Producto(6, "Acevedo", 127.1603));
+            this->productosData.push_back(Models::Producto(7, "Rose", 56.0588));
+            this->productosData.push_back(Models::Producto(8, "Gonzales", 133.542));
+            this->productosData.push_back(Models::Producto(9, "Burks", 190.891));
+            this->productosData.push_back(Models::Producto(10, "Cooke", 34.524));
+            this->productosData.push_back(Models::Producto(11, "Fry", 163.2334));
+            this->productosData.push_back(Models::Producto(12, "Frank", 169.893));
+            this->productosData.push_back(Models::Producto(13, "Alston", 25.646));
+            this->productosData.push_back(Models::Producto(14, "Morton", 165.848));
+            this->productosData.push_back(Models::Producto(15, "Yang", 45.149));
+            this->productosData.push_back(Models::Producto(16, "Mccullough", 63.969));
+            this->productosData.push_back(Models::Producto(17, "Green", 105.474));
+            this->productosData.push_back(Models::Producto(18, "Montgomery", 84.478));
+            this->productosData.push_back(Models::Producto(19, "Dickerson", 75.172));
+        }
+    };
+}
+
+namespace Logic {
+    struct ProductosLogic {
+    public:
+        static List<Models::Producto> GetProductos() {
+            List<Models::Producto> output = List<Models::Producto>();
+            return output;
+        }
+    };
+}
+
+namespace GUI {
+    struct Menu {
+
+    };
 }
 
 int main() {
-    ExampleList();
+    Data::Table_Productos table_productos = Data::Table_Productos();
+    printf("\n --------------------------------------\n");
+    printf("  %-5s| %-20s| %7s\n", "ID", "PRODUCTO", "COSTO");
+    printf(" --------------------------------------\n");
+    table_productos.productosData.forEach([](int _, Models::Producto &product) -> void {
+        printf("  %-5i| %-20s| %7.2lf\n", product.id, product.nombre, product.costo);
+    });
+    printf(" --------------------------------------\n");
     return 0;
 }

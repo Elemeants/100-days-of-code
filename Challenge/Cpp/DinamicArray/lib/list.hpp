@@ -4,9 +4,6 @@
 // AUTHOR:
 // Created by Daniel Polanco - Jdanypa@gmail.com
 //
-// BACKGROUND:
-//  This library compiled for C++, u
-//
 // CONSTRUCTOR:
 //    List<Type>(Size)
 //        - Type: Define the kind of var of the List
@@ -22,8 +19,10 @@
 //    pop_front()  : Deletes the first value
 //    forEach(std::function<void(int, T&)>) 
 //             : Executes a function to every value
-//    map(std::function<Result(int, T&)>)
+//    map(std::function<Result(T&)>)
 //             : Maps the actual List into other List
+//    filter(std::function<bool(T&)> function)
+//            : Returns a list with the values filtered
 //
 // Examples:  
 //    Create a new List of kind T:
@@ -211,11 +210,22 @@ public:
 
   template <typename Result>
   // Maps the actual List into other List
-  List<Result> map(std::function<Result(int, T&)> function) {
+  List<Result> map(std::function<Result(T&)> function) {
     List<Result> output = List<Result>();
     for(int index = 0; index < this->_len; index++) {
       Result data = function(index, this->arr_data[index]);
       output.push_back(data);
+    }
+    return output;
+  }
+
+  // Returns a list with the values filtered
+  List<T> filter(std::function<bool(T&)> function) {
+    List<T> output = List<T>(this->_len);
+    for(int index = 0; index < this->_len; index++) {
+      if(function(this[index])) {
+        output.push_back(this[index]);
+      }
     }
     return output;
   }
