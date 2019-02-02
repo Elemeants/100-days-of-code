@@ -39,3 +39,7 @@ is not finished, but the basic structure is working, also i'm implementing lamba
 
 Today i worked on the Library 'List.hpp' for C++, is stable and working the V1.0, also i created a file called
 'list-test.cpp' is a program to check if the methods are working and stables.
+
+## Day 7: February 1, 2018
+
+Today i made the test of the class List, with bench testing also, and i changed from a pointer of data, into a better structure of nodes, this to save memory and CPU

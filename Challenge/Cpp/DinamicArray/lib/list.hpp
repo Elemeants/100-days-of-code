@@ -103,35 +103,49 @@ namespace Exceptions {
 }
 
 template <typename T>
+struct Node {
+  T data;
+  Node *next;
+  Node()
+  : data(T()), next(NULL) { }
+  Node(T _data)
+  : data(_data), next(NULL) { }
+  ~Node() { }
+};
+
+template <typename T>
 struct List {
 private:
   size_t _len;
-  T *arr_data;
+  struct Node<T> *arr_data;
+  Node<T> *GetIter() { return this->arr_data; }
 public:
   // Constructor with specifict list size
   List(size_t _Size) {
-    this->_len = _Size;
-    this->arr_data = new T[this->_len];
+    this->_len = 0;
+    this->arr_data = new Node<T>;
     for (int i = 0; i < _Size; i++) {
-        this->arr_data[i] = T();
+      this->push(T());
     }
   }
   // Constructor with zero values
   List() {
     this->_len = 0;
-    this->arr_data = new T[this->_len];
-    this->arr_data[0] = T();
+    this->arr_data = NULL;
   }
   // Destructor of the structure
   ~List() {
     this->_len = 0;
     delete this->arr_data;
   }
-  
   // Operator overloading to get/set values of the list
   T &operator[](int index) {
     if (this->_len < index || this->_len > 0) {
-      return this->arr_data[index];
+      Node<T> *iter = this->GetIter();
+      for (int i = 0; iter->next != NULL && i < index; i++) {
+        iter = iter->next;
+      }
+      return iter->data;
     } else {
       throw new Exceptions::IndexArrayException();
     }
@@ -144,67 +158,73 @@ public:
 
   // Deletes all the values
   void clear() {
-    delete this->arr_data;
-    this->arr_data = new T[0];
+    while(this->arr_data != NULL) {
+      Node<T> *iter = this->GetIter();
+      this->arr_data = iter->next;
+      delete iter;
+    }
     this->_len = 0;
-    this->arr_data[0] = T();
+    this->arr_data = NULL;
   }
 
   // Adds a value into the front of the list
   void push(T data) {
-    T *tempData = this->arr_data;
-    this->_len ++;
-    this->arr_data = new T[this->_len];
-    this->arr_data[0] = data;
-    for (int x = 1; x < this->_len; x++) {
-        this->arr_data[x] = tempData[x - 1];
+    Node<T> *new_node = new Node<T>(data);
+    if (this->arr_data == NULL) {
+      this->arr_data = new_node;
+    } else {
+      new_node->next = this->arr_data;
+      this->arr_data = new_node;
     }
-    delete tempData;
+    this->_len ++;
   }
 
   // Adds a value into the last of the list
   void push_back(T data) {
-    T *tempData = this->arr_data;
-    this->_len ++;
-    this->arr_data = new T[this->_len];
-    for (int x = 0; x < (this->_len - 1); x++) {
-      this->arr_data[x] = tempData[x];
+    Node<T> *new_node = new Node<T>(data);
+    Node<T> *iter = this->GetIter();
+    if (this->arr_data == NULL) {
+      this->arr_data = new_node;
+    } else {
+      while (iter->next != NULL) {
+        iter = iter->next;
+      }
+      iter->next = new_node;
     }
-    delete tempData;
-    this->arr_data[this->_len - 1] = data;
+    this->_len ++;
   }
 
   // Deletes the last value
   T pop() {
-    T *tempData = this->arr_data;
-    T data = this->arr_data[0];
-    this->_len --;
-    this->arr_data = new T[this->_len];
-    for (int x = 0; x < this->_len; x++) {
-      this->arr_data[x] = tempData[x + 1];
+    Node<T> *iter = this->GetIter();
+    Node<T> *aux_node = this->arr_data;
+    while(iter->next != NULL) {
+      aux_node = iter;
+      iter = iter->next;
     }
-    delete tempData;
+    aux_node->next = NULL;
+    T data = iter->data;
+    this->_len --;
+    delete iter;
     return data;
   }
 
   // Deletes the firsh value
   T pop_front() {
-    T *tempData = this->arr_data;
+    Node<T> *iter = this->GetIter();
+    this->arr_data = iter->next;
+    T data = iter->data;
+    delete iter;
     this->_len --;
-    T data = this->arr_data[this->_len];
-
-    this->arr_data = new T[this->_len];
-    for (int x = 0; x < this->_len; x++) {
-      this->arr_data[x] = tempData[x];
-    }
-    delete tempData;
     return data;
   }
 
   // Executes a function to every value
   void forEach(std::function<void(int, T&)> function) {
-    for (int index = 0; index < this->_len; index++) {
-      function(index, this->arr_data[index]);
+    Node<T> *iter = this->GetIter();
+    for (int index = 0; iter != NULL && index < this->_len; index++) {
+      function(index, iter->data);
+      iter = iter->next;
     }
   }
 
@@ -212,20 +232,24 @@ public:
   // Maps the actual List into other List
   List<Result> map(std::function<Result(T&)> function) {
     List<Result> output = List<Result>();
-    for(int index = 0; index < this->_len; index++) {
-      Result data = function(index, this->arr_data[index]);
+    Node<T> *iter = this->GetIter();
+    for(int index = 0; iter != NULL && index < this->_len; index++) {
+      Result data = function(iter->data);
       output.push_back(data);
+      iter = iter->next;
     }
     return output;
   }
 
   // Returns a list with the values filtered
   List<T> filter(std::function<bool(T&)> function) {
-    List<T> output = List<T>(this->_len);
-    for(int index = 0; index < this->_len; index++) {
+    List<T> output = List<T>();
+    Node<T> *iter = this->GetIter();
+    for(int index = 0; iter != NULL && index < this->_len; index++) {
       if(function(this[index])) {
         output.push_back(this[index]);
       }
+      iter = iter->next;
     }
     return output;
   }

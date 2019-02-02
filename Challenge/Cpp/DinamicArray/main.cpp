@@ -23,9 +23,9 @@ namespace Models {
 
 namespace Data {
     struct Table_Productos {
-        List<Models::Producto> productosData;
+        List<Models::Producto> productosData = List<Models::Producto>();
         Table_Productos() {
-            this->productosData = List<Models::Producto>(0);
+            this->productosData = List<Models::Producto>();
             this->productosData.push_back(Models::Producto(0, "Langley", 144.883));
             this->productosData.push_back(Models::Producto(1, "Hinton", 84.0902));
             this->productosData.push_back(Models::Producto(2, "Patel", 15.8934));
@@ -47,32 +47,19 @@ namespace Data {
             this->productosData.push_back(Models::Producto(18, "Montgomery", 84.478));
             this->productosData.push_back(Models::Producto(19, "Dickerson", 75.172));
         }
-    };
-}
-
-namespace Logic {
-    struct ProductosLogic {
-    public:
-        static List<Models::Producto> GetProductos() {
-            List<Models::Producto> output = List<Models::Producto>();
-            return output;
+        ~Table_Productos() {
+            productosData.clear();
         }
-    };
-}
-
-namespace GUI {
-    struct Menu {
-
     };
 }
 
 int main() {
     Data::Table_Productos table_productos = Data::Table_Productos();
-    printf("\n --------------------------------------\n");
-    printf("  %-5s| %-20s| %7s\n", "ID", "PRODUCTO", "COSTO");
+    printf("\n -------------------------------------- \n");
+    printf("  %-5s| %-20s| %7s\n", "ID", "PERSONA", "CREDITO");
     printf(" --------------------------------------\n");
     table_productos.productosData.forEach([](int _, Models::Producto &product) -> void {
-        printf("  %-5i| %-20s| %7.2lf\n", product.id, product.nombre, product.costo);
+        printf("  %-5i| %-20s| $ %-7.2lf\n", product.id, product.nombre, product.costo);
     });
     printf(" --------------------------------------\n");
     return 0;
