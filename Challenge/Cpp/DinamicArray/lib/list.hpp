@@ -103,29 +103,28 @@ namespace Exceptions {
 }
 
 template <typename T>
-struct Node {
-  T data;
-  Node *next;
-  Node()
-  : data(T()), next(NULL) { }
-  Node(T _data)
-  : data(_data), next(NULL) { }
-  ~Node() { }
-};
-
-template <typename T>
 struct List {
 private:
+  template <typename N>
+  struct Node {
+    N data;
+    Node *next;
+    Node()
+    : data(N()), next(NULL) { }
+    Node(N _data)
+    : data(_data), next(NULL) { }
+    ~Node() { }
+  };
   size_t _len;
   struct Node<T> *arr_data;
-  Node<T> *GetIter() { return this->arr_data; }
+  struct Node<T> *GetIter() { return this->arr_data; }
 public:
   // Constructor with specifict list size
   List(size_t _Size) {
     this->_len = 0;
-    this->arr_data = new Node<T>;
+    this->arr_data = new Node<T>[_Size];
     for (int i = 0; i < _Size; i++) {
-      this->push(T());
+      this->arr_data[i] = 0;
     }
   }
   // Constructor with zero values
