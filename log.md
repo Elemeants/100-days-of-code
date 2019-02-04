@@ -43,3 +43,11 @@ Today i worked on the Library 'List.hpp' for C++, is stable and working the V1.0
 ## Day 7: February 1, 2018
 
 Today i made the test of the class List, with bench testing also, and i changed from a pointer of data, into a better structure of nodes, this to save memory and CPU
+
+## Day 8: February 2, 2018
+
+Woking on CPP programming and studing Design patters, is all.
+
+## Day 9: February 3, 20188
+
+Starting to work on a HangFire framework for C#, writing a test project to do a test with signalR to launch notification when is endend a job on HangFire

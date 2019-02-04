@@ -124,19 +124,22 @@ public:
     this->_len = 0;
     this->arr_data = new Node<T>[_Size];
     for (int i = 0; i < _Size; i++) {
-      this->arr_data[i] = 0;
+      this[i] = 0;
     }
   }
+
   // Constructor with zero values
   List() {
     this->_len = 0;
     this->arr_data = NULL;
   }
+
   // Destructor of the structure
   ~List() {
     this->_len = 0;
     delete this->arr_data;
   }
+  
   // Operator overloading to get/set values of the list
   T &operator[](int index) {
     if (this->_len < index || this->_len > 0) {
