@@ -51,3 +51,7 @@ Woking on CPP programming and studing Design patters, is all.
 ## Day 9: February 3, 20188
 
 Starting to work on a HangFire framework for C#, writing a test project to do a test with signalR to launch notification when is endend a job on HangFire
+
+## Day 10: February 4, 20188
+
+Working on SignalR and Hangfire Frameworks to do a App with background jobs, with notification system when is finished 
