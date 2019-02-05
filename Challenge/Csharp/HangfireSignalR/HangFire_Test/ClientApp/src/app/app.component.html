@@ -1,0 +1,9 @@
+<h1> Testing </h1>
+<input type="number" placeholder="Job time" [(ngModel)]="JobTimer">
+<button (click)="SendJob()" mat-button> Send job </button>
+<hr>
+<div *ngFor="let notification of Messages">
+  <h5> {{notification.title}} </h5>
+  <p> {{notification.message}} </p>
+  <hr>
+</div>
