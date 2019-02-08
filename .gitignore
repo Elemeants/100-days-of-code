@@ -13,4 +13,7 @@ Cargo.lock
 *.exe
 
 # Ignore JetBrains files
-.idea/
+.idea
+
+# Ignore Visual Studio Code configuration files
+.vscode/

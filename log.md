@@ -55,3 +55,15 @@ Starting to work on a HangFire framework for C#, writing a test project to do a 
 ## Day 10: February 4, 20188
 
 Working on SignalR and Hangfire Frameworks to do a App with background jobs, with notification system when is finished 
+
+## Day 11: February 5, 20188
+
+Workin on a python proyect in folder python/Calculo_varillas
+
+## Day 12: February 6, 20188
+
+Finished the python code 'Calculo_varillas'
+
+## Day 13: February 7, 20188
+
+Refactory to the Cpp library 'list' to add new libraries to the namespace LJP
